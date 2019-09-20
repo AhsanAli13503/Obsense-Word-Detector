@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+      <link href="css/resume.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <h3 style="text-align: center">Obsense Word Detector</h3>
+            </div>
+        </nav>
+        
+        <div style="text-align: center">
+          <label>Enter Text Here TO detect</label><br>
+          <textarea id ="are" rows="10" cols="50"></textarea>
+          <br><br>
+          <button id="buttn" type="button" class="btn btn-primary">Analyze</button>
+          <div id = "display" style="display: none">
+            <hr>
+            <label>After Analysis....</label>
+            <h3  id = "data" >abc</h3>
+            <hr>
+          </div>
+          
+        </div>
+
+        <script>
+            $(document).ready(function() {
+            $('#buttn').on('click', function(event) {
+            $.ajax({
+              data : {
+                data1 : $('#are').val(),
+              },
+              type : 'POST',
+              url : '/process'
+              })
+              .done(function(data) {
+                document.getElementById("buttn").style.display='none'
+                var dis = document.getElementById("display");
+                dis.style.display='block';
+                document.getElementById("data").innerHTML=data;
+              });
+            
+            });
+        });
+
+        </script>
+          
+    </body>
+</html>

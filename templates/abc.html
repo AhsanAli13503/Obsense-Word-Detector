@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="shortcut icon" href="icon.png" />
+	<title>Ali Diagnostics</title>
+
+  <script type="text/javascript" src="recep.js"></script>
+  <link rel="stylesheet" href="recep.css">
+  <style type="text/css">
+    
+        
+        #left
+        {
+            margin: 20px;
+            float:right;
+            padding: 20px;
+        }
+        
+        #noDisplay
+        {
+            display: none;
+        }
+
+        @import url("https://bootswatch.com/flatly/bootstrap.min.css");
+
+body {
+  padding-top: 50px;
+}
+footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    background:#ecf0f1;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -40%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 40%;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 40%;
+    margin-left: 12px;
+  }
+}
+
+#sidebar {
+    padding:15px;
+    margin-top:10px;
+}
+
+#about{
+    display: none;
+}
+#experience{
+    display: none;
+}
+  </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+		<a class="navbar-brand" href="#">Obsense Word Detector Api</a>
+		
+  	</nav>
+      <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="sidebar-nav">
+                <ul class="nav">
+
+                    
+                <li class="nav-item">
+                        <a id = "abc1" class="nav-link js-scroll-trigger" href="#about">Do Analysis On Text</a>
+                </li>
+                <li class="nav-item">
+                        <a id = "abc2" class="nav-link js-scroll-trigger" href="#experience">Accuracy Of Different Models And Vectorization Technique</a>
+                </li>
+                <li class="nav-item">
+                  <a id = "abc3" class="nav-link js-scroll-trigger" href="#AddNewData">Add Data And Train Model</a>
+                </li>
+                    
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+
+        <div class="col-xs-12 col-sm-9">
+            <section style="text-align:center;" class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+              <div style="text-align: center">
+                <label>Enter Text Here TO detect</label><br>
+                <textarea id ="are" rows="10" cols="50"></textarea>
+                <br><br>
+                <button id="buttn" type="button" class="btn btn-primary">Analyze</button>
+                <button id="buttn1" type="button" class="btn btn-primary">callapi for anlysis</button>
+                <div id = "display" style="display: none">
+                  <div>
+                    <hr>
+                    <label>SYSTEM RESULTS
+                    <h5  id = "data" >abc</h5>
+                  </label>
+                    <hr>
+                  </div>
+                  
+                </div>
+                <label>API RESULTS
+                <ul id="myList1" ></ul></b> 
+              </label>
+              </div>
+            </section>
+            <section style= "text-align:center;"class="resume-section p-3 p-lg-5 d-flex align-items-center" id="experience">
+              <div class="container">
+                <label>Accuracy Of Naive Bayes With Different Vectorization Techniques</label> 
+                <hr> 
+               <b><ul id="myList"></ul></b> 
+               <hr>
+              </div>
+              <div class="container">
+                <label>Accuracy Of Linear Classifier With Different Vectorization Techniques</label> 
+                <hr> 
+               <b><ul id="myList2"></ul></b> 
+               <hr>
+              </div>
+                
+            </section>
+            <section style= "text-align:center;"class="resume-section p-3 p-lg-5 d-flex align-items-center" id="AddNewData">
+              <div style="text-align: center">
+                <label>Enter words seprated by white spaces</label><br>
+                <textarea id ="word" rows="10" cols="50"></textarea>
+                <br><br>
+                <button id="buttn3" type="button" class="btn btn-primary">Add Word In Dataset</button>
+                <label>
+                  <h5 id="dataAdder"></h5>
+                  <h5 id="dataAdder2"></h5>
+                </label>
+              </div>
+            </section>
+        </div>
+</div>
+<script>
+var a=document.getElementById("AddNewData").style.display="none";
+document.getElementById("abc1").addEventListener("click", myFunction);
+document.getElementById("abc2").addEventListener("click", myFunction2);
+document.getElementById("abc3").addEventListener("click", myFunction3);
+function myFunction() {
+    var a = document.getElementById("experience");
+    var b=document.getElementById("AddNewData");
+    b.style.display="none";
+    a.style.display = "none";
+    var a = document.getElementById("about");
+    a.style.display = "block";
+}
+function myFunction3() {
+    var a = document.getElementById("experience");
+    a.style.display = "none";
+    var a=document.getElementById("AddNewData");
+    a.style.display="block";
+    var a = document.getElementById("about");
+    a.style.display = "none";
+}
+function myFunction2() {
+    var a = document.getElementById("experience");
+    a.style.display = "block";
+    var a = document.getElementById("about");
+    a.style.display = "none";
+    var b=document.getElementById("AddNewData");
+    b.style.display="none";
+    $.ajax({
+              
+              type : 'POST',
+              url : '/nb'
+              })
+              .done(function(data) {
+                var a =data.split('+');
+                for (var i = 0; i< a.length; i++)
+                {
+                  if( a[i]!=""){
+                  var node = document.createElement("LI");                 // Create a <li> node
+                  var textnode = document.createTextNode(a[i]);         // Create a text node
+                  node.appendChild(textnode);                              // Append the text to <li>
+                  document.getElementById("myList").appendChild(node);
+                  }
+                }
+              });
+    $.ajax({
+              
+              type : 'POST',
+              url : '/lc'
+              })
+              .done(function(data) {
+                var a =data.split('+');
+                for (var i = 0; i< a.length; i++)
+                {
+                  if( a[i]!=""){
+                  var node = document.createElement("LI");                 // Create a <li> node
+                  var textnode = document.createTextNode(a[i]);         // Create a text node
+                  node.appendChild(textnode);                              // Append the text to <li>
+                  document.getElementById("myList2").appendChild(node);
+                  }
+                }
+              });
+    }
+$(document).ready(function() {
+            $('#buttn').on('click', function(event) {
+            $.ajax({
+              data : {
+                data1 : $('#are').val(),
+              },
+              type : 'POST',
+              url : '/process'
+              })
+              .done(function(data) {
+                document.getElementById("buttn").style.display='none'
+                var dis = document.getElementById("display");
+                dis.style.display='block';
+                document.getElementById("data").innerHTML=data;
+              });
+            
+            });
+            $('#buttn1').on('click', function(event) {
+            $.ajax({
+              data : {
+                data1 : $('#are').val(),
+              },
+              type : 'POST',
+              url : '/callapi'
+              })
+              .done(function(data) {
+                var a =data.split('+');
+                for (var i = 0; i< a.length; i++)
+                {
+                  if( a[i]!=""){
+                  var node = document.createElement("LI");                 // Create a <li> node
+                  var textnode = document.createTextNode(a[i]);         // Create a text node
+                  node.appendChild(textnode);                              // Append the text to <li>
+                  document.getElementById("myList1").appendChild(node);
+                  }
+                }
+                document.getElementById("buttn1").style.display="none";
+              });
+            
+            });
+            $('#buttn3').on('click', function(event) {
+            $.ajax({
+              data : {
+                data1 : $('#word').val(),
+              },
+              type : 'POST',
+              url : '/addData'
+              })
+              .done(function(data) {
+                document.getElementById("buttn3").style.display='none'
+                var dis = document.getElementById("dataAdder");
+                dis.style.display='block';
+                document.getElementById("dataAdder").innerHTML="Data Added Succefully To Dataset";
+                document.getElementById("dataAdder2").innerHTML="Newly Added Words In dataset are: "+data;
+              });
+            
+            });
+  });
+
+</script>
+</body>
